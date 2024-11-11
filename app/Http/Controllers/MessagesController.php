@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MessagesStorageService;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
-    public function __construct(protected MessagesStorageService $messagesStorage)
-    {
-
-    }
-
     public function index()
     {
-        $messages = $this->messagesStorage->all();
+        $messages = Message::all();
 
         return view('messages/index', compact('messages'));
     }
@@ -30,13 +25,14 @@ class MessagesController extends Controller
             'title' => 'min:10|max:30',
             'content' => 'min:10',
         ]);
+        Message::create($validated);
 
         return redirect()->route('messages.index')->with('success', 'Message has been created.');
     }
 
     public function show(string $id)
     {
-        $message = $this->messagesStorage->findOrFail($id);
+        $message = Message::findOrFail($id);
 
         return view('messages/show', compact('message'));
     }

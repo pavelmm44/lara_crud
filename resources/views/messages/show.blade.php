@@ -14,8 +14,9 @@
     <div>
         <p><b>ID</b>: {{ $message->id }}</p>
         <p><b>Title</b>: {{ $message->title }}</p>
-        <p><b>Date</b>: {{ $message->dt }}</p>
         <p><b>Content</b>: {{ $message->content }}</p>
+        <p><b>Creation date</b>: {{ $message->created_at }}</p>
+        <p><b>Update date</b>: {{ $message->updated_at }}</p>
     </div>
     <hr>
 </body>

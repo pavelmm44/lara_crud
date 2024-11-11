@@ -21,7 +21,7 @@
                 @error('title')
                     <p>{{ $message }}</p>
                 @enderror
-            </div>
+            </div><br>
 
             <div>
                 <label for="content">Content</label>
@@ -29,7 +29,7 @@
                 @error('content')
                     <p>{{ $message }}</p>
                 @enderror
-            </div>
+            </div><br>
 
             <button>Save</button>
             <button type="button" id="send-valid-btn">sendValid</button>
