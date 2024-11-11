@@ -1,20 +1,16 @@
-@extends('layouts.app')
-
-@section('title', 'Show events list')
-
-@section('content')
-    <a href="{{ route('events.create') }}"><b>Create event</b></a>
-    <hr>
-    @if(session('success'))
-        <p>{{ session()->get('success') }}</p>
+<x-layout.default title="Show events list">
+    <div>
+        <a href="{{ route('events.create') }}" class="btn btn-sm btn-success">Create event</a>
         <hr>
-    @endif
-    <h2>List of events</h2>
-    @foreach($events as $event)
-        <div>
-            <p><b>Title</b>: {{ $event->title }}</p>
-            <a href="{{ route('events.show', [ $event->id ]) }}"><b>Show more</b></a>
-        </div>
-        <hr>
-    @endforeach
-@endsection
+    </div>
+    <div>
+        <h2>List of events</h2>
+        @foreach($events as $event)
+            <div>
+                <p><b>Title</b>: {{ $event->title }}</p>
+                <a href="{{ route('events.show', [ $event->id ]) }}" class="btn btn-sm btn-info">Show more</a>
+            </div>
+            <hr>
+        @endforeach
+    </div>
+</x-layout.default>

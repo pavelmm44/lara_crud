@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import axios from 'axios';
 window.axios = axios;
 
@@ -12,8 +14,8 @@ if (btnSendValid) {
 
         window.axios.post('/messages/valid',
             {
-                title: createForm.querySelector('#title').value,
-                content: createForm.querySelector('#content').value
+                title: createForm.querySelector('[name="title"]').value,
+                content: createForm.querySelector('[name="content"]').value
             })
             .then((response) => console.log(response));
     });

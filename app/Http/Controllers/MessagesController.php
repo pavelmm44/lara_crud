@@ -58,6 +58,5 @@ class MessagesController extends Controller
             'title' => 'min:10|max:30',
             'content' => 'min:10'
         ]);
-        return true;
     }
 }
