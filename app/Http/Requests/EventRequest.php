@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -23,11 +24,9 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categories = config('categories');
-
         $uniqueRule = Rule::unique(Event::class);
 
-        if ($this->method() == 'PUT') {
+        if ($this->route('event')) {
             $uniqueRule = $uniqueRule->ignore($this->route('event'));
         }
 
@@ -42,7 +41,7 @@ class EventRequest extends FormRequest
             'duration' => 'numeric|between:0.5,99.99|decimal:2',
             'category_id' => [
                 'required',
-                Rule::in(array_keys($categories))
+                'exists:' . Category::class . ',id'
             ]
         ];
     }

@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Models\Category;
 use App\Models\Event;
 
 class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Event::with('category')->get();
 
         return view('events.index', compact('events'));
     }
 
     public function create()
     {
-        return view('events.create', ['categories' => config('categories')]);
+        $categories = Category::all()->pluck('title', 'id');
+
+        return view('events.create', compact('categories'));
     }
 
     public function store(EventRequest $request)
@@ -28,18 +31,14 @@ class EventController extends Controller
     }
 
 
-    public function show(string $id)
+    public function show(Event $event)
     {
-        $event = Event::findOrFail($id);
-        $categories = config('categories');
-
-        return view('events/show', compact('event', 'categories'));
+        return view('events/show', compact('event'));
     }
 
-    public function edit(string $id)
+    public function edit(Event $event)
     {
-        $event = Event::findOrFail($id);
-        $categories = config('categories');
+        $categories = Category::all()->pluck('title', 'id');
 
         return view('events/edit', compact('event', 'categories'));
     }
@@ -52,9 +51,9 @@ class EventController extends Controller
         return redirect()->route('events.edit', [$event->id])->with('success', 'Event has been updated');
     }
 
-    public function destroy(string $id)
+    public function destroy(Event $event)
     {
-        Event::destroy($id);
+        $event->delete();
 
         return redirect()->route('events.index')->with('success', 'Event has been deleted');
     }

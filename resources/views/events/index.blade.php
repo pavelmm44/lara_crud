@@ -9,6 +9,7 @@
             <div>
                 <p><b>Title</b>: {{ $event->title }}</p>
                 <a href="{{ route('events.show', [ $event->id ]) }}" class="btn btn-sm btn-info">Show more</a>
+                <p><b>Category</b>: {{ $event->category->title }}</p>
             </div>
             <hr>
         @endforeach

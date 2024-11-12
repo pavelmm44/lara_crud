@@ -10,7 +10,7 @@
         <p><b>Url</b>: {{ $event->url }}</p>
         <p><b>Start time</b>: {{ $event->start_time }}</p>
         <p><b>Duration</b>: {{ $event->duration }} hours</p>
-        <p><b>Category</b>: {{ $categories[$event->category_id] }}</p>
+        <p><b>Category</b>: {{ $event->category->title }}</p>
         <p><b>Creation date</b>: {{ $event->created_at }}</p>
         <p><b>Update date</b>: {{ $event->updated_at }}</p>
         <hr>
