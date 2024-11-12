@@ -12,6 +12,8 @@
             @method('PUT')
             <x-form.input type="text" label="Title" name="title" :item="$event"/>
 
+            <x-form.input type="text" label="Url" name="url" :item="$event"/>
+
             <x-form.input type="datetime-local" label="Start time" name="start_time" :item="$event"/>
 
             <x-form.input type="text" label="Duration(hours)" name="duration" :item="$event"/>

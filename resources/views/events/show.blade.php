@@ -7,6 +7,7 @@
         <h2>Event info</h2>
         <p><b>ID</b>: {{ $event->id }}</p>
         <p><b>Title</b>: {{ $event->title }}</p>
+        <p><b>Url</b>: {{ $event->url }}</p>
         <p><b>Start time</b>: {{ $event->start_time }}</p>
         <p><b>Duration</b>: {{ $event->duration }} hours</p>
         <p><b>Category</b>: {{ $categories[$event->category_id] }}</p>

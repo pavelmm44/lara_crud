@@ -11,6 +11,8 @@
 
             <x-form.input type="text" label="Title" name="title"/>
 
+            <x-form.input type="text" label="Url" name="url"/>
+
             <x-form.input type="datetime-local" label="Start time" name="start_time"/>
 
             <x-form.input type="text" label="Duration(hours)" name="duration"/>

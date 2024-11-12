@@ -44,13 +44,12 @@ class EventController extends Controller
         return view('events/edit', compact('event', 'categories'));
     }
 
-    public function update(EventRequest $request, string $id)
+    public function update(EventRequest $request, Event $event)
     {
-        $event = Event::findOrFail($id);
         $validated = $request->validated();
 
         $event->update($validated);
-        return redirect()->route('events.edit', [$id])->with('success', 'Event has been updated');
+        return redirect()->route('events.edit', [$event->id])->with('success', 'Event has been updated');
     }
 
     public function destroy(string $id)
