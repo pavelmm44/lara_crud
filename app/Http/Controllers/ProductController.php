@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveShopsProductRequest;
 use App\Models\Product;
+use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -37,6 +39,32 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+
+    public function editShops(Product $product)
+    {
+        $shops = Shop::all();
+
+        $productShops = $product->shops->map(function ($item) {
+            return [
+                'shop_id' => $item->pivot->shop_id,
+                'price' => $item->pivot->price
+            ];
+        })->pluck('price', 'shop_id');
+
+        return view('products/edit-shops', compact('shops', 'productShops', 'product'));
+    }
+
+    public function saveShops(SaveShopsProductRequest $request, Product $product)
+    {
+          $validated = array_map(function ($val) {
+
+              return ['price' => $val];
+          }, array_filter($request->validated('shops')));
+
+          $product->shops()->sync($validated);
+
+          return redirect()->route('products.shops.edit', [$product->id])->with('success', 'Shops configuration has been saved');
     }
 
     /**
