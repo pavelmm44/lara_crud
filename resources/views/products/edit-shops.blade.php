@@ -10,7 +10,7 @@
         </div>
 
         <h3>Edit shops configuration</h3>
-        <form action="{{ route('products.shops.save', [ $product->id ]) }}" method="post">
+        <form action="{{ route('products.shops', [ $product->id ]) }}" method="post">
             @csrf
 
             @error('shops')
@@ -19,19 +19,26 @@
                 </div>
             @enderror
 
-            @foreach($shops as $shop)
+            <table class="table table-bordered">
+                <tr>
+                    <td>Shop</td>
+                    <td>Price</td>
+                </tr>
+                @foreach($shops as $shop)
+                    <tr>
+                        <td>{{ $shop->title }}</td>
+                        <td>
+                            <input type="hidden" name="shops[{{ $loop->index }}][id]" value="{{ $shop->id }}">
 
-                <div class="mb-3">
+                            <input type="text" name="shops[{{ $loop->index }}][price]" class="form-control" value="{{ old('shops.' . $loop->index . '.price', $productShops->get($shop->id)) }}">
 
-                    <label for="shop_{{ $shop->id }}" class="form-label">{{ $shop->title }}</label>
+                            <x-form.error name="{{ 'shops.' . $loop->index . '.price' }}" />
+                            <x-form.error name="{{ 'shops.' . $loop->index . '.id' }}" />
+                        </td>
+                    </tr>
+                @endforeach
 
-                    <input type="text" name="shops[{{ $shop->id }}]" class="form-control" id="shop_{{ $shop->id }}" value="{{ old('shops.' . $shop->id, $productShops->get($shop->id)) }}">
-
-                    <x-form.error name="{{ 'shops.' . $shop->id }}" />
-                    <x-form.error name="{{ 'shops_ids.' . $shop->id }}" />
-                </div>
-
-            @endforeach
+            </table>
 
             <button type="submit" class="btn btn-primary btn-sm">Save</button>
         </form>

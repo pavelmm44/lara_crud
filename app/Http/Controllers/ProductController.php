@@ -47,24 +47,32 @@ class ProductController extends Controller
 
         $productShops = $product->shops->map(function ($item) {
             return [
-                'shop_id' => $item->pivot->shop_id,
-                'price' => $item->pivot->price
+                'id' => $item->id,
+                'price' => $item->productPrice
             ];
-        })->pluck('price', 'shop_id');
+        })->pluck('price', 'id');
 
         return view('products/edit-shops', compact('shops', 'productShops', 'product'));
     }
 
     public function saveShops(SaveShopsProductRequest $request, Product $product)
     {
-          $validated = array_map(function ($val) {
+        $validated = collect($request->validated('shops'));
+        $validated = $validated
+            ->map(fn ($item) => [...$item, 'info' => ['price' => $item['price']]])
+            ->pluck('info', 'id')
+            ->reject(fn ($item) => is_null($item['price']));
 
-              return ['price' => $val];
-          }, array_filter($request->validated('shops')));
+        if ($request->isJson()) {
+            $product->shops()->detach($validated->keys());
+            $product->shops()->attach($validated);
 
-          $product->shops()->sync($validated);
+            return true;
+        } else {
+            $product->shops()->sync($validated);
 
-          return redirect()->route('products.shops.edit', [$product->id])->with('success', 'Shops configuration has been saved');
+            return redirect()->route('products.shops', [$product->id])->with('success', 'Shops configuration has been saved');
+        }
     }
 
     /**

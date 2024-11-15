@@ -20,5 +20,5 @@ Route::resource('categories', CategoryController::class);
 Route::resource('shops', CategoryController::class);
 Route::resource('products', CategoryController::class);
 
-Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops.edit');
-Route::post('products/{product}/shops', [ProductController::class, 'saveShops'])->name('products.shops.save');
+Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops');
+Route::post('products/{product}/shops', [ProductController::class, 'saveShops']);

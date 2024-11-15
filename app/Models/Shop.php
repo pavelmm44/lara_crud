@@ -14,4 +14,9 @@ class Shop extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('price')->withTimestamps();
     }
+
+    public function getProductPriceAttribute()
+    {
+        return $this->pivot?->price ?? null;
+    }
 }

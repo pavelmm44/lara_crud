@@ -12,19 +12,12 @@ class SaveShopsProductRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            'shops_ids' => array_keys($this->shops),
-        ]);
-    }
-
     public function rules(): array
     {
         return [
             'shops' => 'required|array',
-            'shops.*' => 'nullable|integer|gt:0',
-            'shops_ids.*' => 'integer|exists:' . Shop::class . ',id',
+            'shops.*.price' => 'nullable|integer|gt:0',
+            'shops.*.id' => 'integer|exists:' . Shop::class . ',id',
         ];
     }
 
@@ -32,8 +25,8 @@ class SaveShopsProductRequest extends FormRequest
     {
         return [
             'shops' => 'Shops list',
-            'shops_ids.*' => 'shop',
-            'shops.*' => 'price'
+            'shops.*.price' => 'Price',
+            'shops.*.id' => 'Shop'
         ];
     }
 }
