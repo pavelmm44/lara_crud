@@ -21,7 +21,12 @@ Route::resource('categories', CategoryController::class);
 Route::resource('shops', ShopController::class);
 Route::delete('shops/{shop}/products', [ShopController::class, 'deleteProducts']);
 
+Route::get('products/prices', [ProductController::class, 'getProductsShopsPrice']);
 Route::resource('products', ProductController::class);
 
 Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops');
 Route::post('products/{product}/shops', [ProductController::class, 'saveShops']);
+
+Route::get('products/{product}/prices', [ProductController::class, 'getShopsPrice']);
+Route::get('products/best/price', [ProductController::class, 'getBestPriceProducts']);
+

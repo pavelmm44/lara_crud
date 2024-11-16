@@ -2,40 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsShopsPriceRequest;
 use App\Http\Requests\SaveShopsProductRequest;
 use App\Models\Product;
 use App\Models\Shop;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
         //
@@ -59,9 +50,9 @@ class ProductController extends Controller
     {
         $validated = collect($request->validated('shops'));
         $validated = $validated
-            ->map(fn ($item) => [...$item, 'info' => ['price' => $item['price']]])
+            ->map(fn($item) => [...$item, 'info' => ['price' => $item['price']]])
             ->pluck('info', 'id')
-            ->reject(fn ($item) => is_null($item['price']));
+            ->reject(fn($item) => is_null($item['price']));
 
         if ($request->isJson()) {
             $product->shops()->detach($validated->keys());
@@ -75,25 +66,50 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function getShopsPrice(Product $product)
+    {
+        return $product->shops()
+            ->orderBy('price')
+            ->get();
+    }
+
+    public function getProductsShopsPrice(ProductsShopsPriceRequest $request)
+    {
+        $res = Product::with(['shops' => function (BelongsToMany $query) {
+                $query->orderBy('price');
+            }])
+            ->whereIn('id', $request->validated('products'))
+            ->get();
+
+        return $res;
+    }
+
+    public function getBestPriceProducts()
+    {
+        $products = DB::select("
+        SELECT product_id,
+           (MIN(price) /
+            (SELECT price FROM product_shop WHERE product_id = ps.product_id ORDER BY price LIMIT 1, 1)) AS coef
+            FROM product_shop ps
+            GROUP BY product_id
+            HAVING
+                    coef < 0.95
+            ORDER BY coef
+        ");
+
+        return $products;
+    }
+
     public function edit(Product $product)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Product $product)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         //

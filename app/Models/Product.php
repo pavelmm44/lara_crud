@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Product extends Model
 {
     protected $guarded = [];
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function shops(): BelongsToMany
     {

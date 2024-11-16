@@ -9,6 +9,8 @@ class Shop extends Model
 {
 
     protected $guarded = [];
+    protected $hidden = ['pivot', 'created_at', 'updated_at'];
+    protected $appends = ['productPrice'];
 
     public function products(): BelongsToMany
     {
