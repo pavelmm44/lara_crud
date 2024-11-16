@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteProductsShopRequest;
+use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -61,5 +63,12 @@ class ShopController extends Controller
     public function destroy(Shop $shop)
     {
         //
+    }
+
+    public function deleteProducts(DeleteProductsShopRequest $request, Shop $shop)
+    {
+        $shop->products()->detach($request->validated('products'));
+
+        return true;
     }
 }
