@@ -25,7 +25,8 @@
             </form>
         @endauth
         @guest
-            <a href="{{ route('login') }}" class="btn btn-sm btn-warning">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-sm btn-warning">Login</a> |
+            <a href="{{ route('register') }}" class="btn btn-sm btn-success">Registration</a>
         @endguest
         <hr>
     </div>

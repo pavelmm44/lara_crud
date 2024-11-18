@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
@@ -35,6 +36,9 @@ Route::get('products/best/price', [ProductController::class, 'getBestPriceProduc
 Route::middleware('guest')->group(function () {
     Route::get('login', [SessionController::class, 'create'])->name('login');
     Route::post('login', [SessionController::class, 'store']);
+
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
+    Route::post('register', [RegisterController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
