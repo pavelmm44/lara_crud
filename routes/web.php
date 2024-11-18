@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MessagesController;
@@ -9,9 +10,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::resource('messages', MessagesController::class);
+
+Route::resource('messages', MessagesController::class)->middleware('auth');
 Route::post('messages/valid', [MessagesController::class, 'sendValid']);
 
 Route::resource('events', EventController::class);
@@ -30,3 +32,11 @@ Route::post('products/{product}/shops', [ProductController::class, 'saveShops'])
 Route::get('products/{product}/prices', [ProductController::class, 'getShopsPrice']);
 Route::get('products/best/price', [ProductController::class, 'getBestPriceProducts']);
 
+Route::middleware('guest')->group(function () {
+    Route::get('login', [SessionController::class, 'create'])->name('login');
+    Route::post('login', [SessionController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [SessionController::class, 'destroy'])->name('logout');
+});

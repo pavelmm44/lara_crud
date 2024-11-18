@@ -2,9 +2,9 @@
     'label',
     'name',
     'classes' => 'mb-3',
-    'type' => 'text',
     'value' => null,
     'item' => null,
+    'checked' => false
 ])
 
 @php
@@ -20,7 +20,6 @@
 @endphp
 
 <div class="{{ $classes }}">
-    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
-    <input type="{{ $type }}" name="{{ $name }}" class="form-control" id="{{ $id }}" value="{{ $realValue }}">
-    <x-form.error name="{{ $name }}" />
+    <input type="checkbox" name="{{ $name }}" class="form-check-input" id="{{ $id }}" {{ $realValue ? 'checked' : '' }}>
+    <label for="{{ $id }}" class="form-check-label">{{ $label }}</label>
 </div>

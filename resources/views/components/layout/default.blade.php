@@ -16,6 +16,18 @@
 <header>
     <div class="container">
         <h3>Here is header</h3>
+        @auth
+            <p>Hello, {{ auth()->user()->name }}!</p>
+
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button class="btn btn-sm btn-danger">Logout</button>
+            </form>
+        @endauth
+        @guest
+            <a href="{{ route('login') }}" class="btn btn-sm btn-warning">Login</a>
+        @endguest
+        <hr>
     </div>
 </header>
 
