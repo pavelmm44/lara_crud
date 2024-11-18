@@ -29,6 +29,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('messages.index')->with('success', 'You are signed up');
+        return redirect()->route('messages.index')->with('success', 'You are signed up. Verification email has been sent to your email address');
     }
 }
