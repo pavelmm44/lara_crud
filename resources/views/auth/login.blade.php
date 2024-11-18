@@ -12,6 +12,7 @@
             <x-form.checkbox label="Remember" name="remember"/>
 
             <button class="btn btn-primary btn-sm" type="submit">Send</button>
+            <a href="{{ route('password.request') }}" class="ml-3">Forgot password</a>
         </form>
     </div>
     <hr>

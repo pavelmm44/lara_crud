@@ -1,20 +1,19 @@
-<x-layout.default title="Registration">
+<x-layout.default title="Reset password">
 
     <div>
-        <h3>Registration</h3>
-        <form action="{{ route('register') }}" method="post">
+        <h3>Reset password</h3>
+        <form action="{{ route('password.store') }}" method="post">
             @csrf
 
-            <x-form.input label="Name" name="name"/>
+            <input type="hidden" name="token" value="{{ $request->token }}">
 
-            <x-form.input label="Email" name="email"/>
+            <x-form.input label="Email" name="email" value="{{ $request->email }}"/>
 
             <x-form.input type="password" label="Password" name="password"/>
 
             <x-form.input type="password" label="Confirm Password" name="password_confirmation"/>
 
             <button class="btn btn-primary btn-sm" type="submit">Send</button>
-            <a href="{{ route('password.request') }}" class="ml-3">Forgot password</a>
         </form>
     </div>
     <hr>
