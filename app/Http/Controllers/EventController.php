@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class EventController extends Controller
+class EventController extends Controller implements HasMiddleware
 {
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth', except: ['index'])
+        ];
+    }
+
     public function index()
     {
-        $events = Event::with('category')->get();
+        $events = Event::with(['category', 'user'])->get();
 
         return view('events.index', compact('events'));
     }
@@ -24,8 +33,9 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        $validated = $request->validated();
-        Event::create($validated);
+        $event = new Event($request->validated());
+        $event->user_id = $request->user()->id;
+        $event->save();
 
         return redirect()->route('events.index')->with('success', 'Event has been created');
     }

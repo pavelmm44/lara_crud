@@ -13,6 +13,8 @@
         <p><b>Category</b>: {{ $event->category->title }}</p>
         <p><b>Creation date</b>: {{ $event->created_at }}</p>
         <p><b>Update date</b>: {{ $event->updated_at }}</p>
+        <p><b>User ID</b>: {{ $event->user->id }}</p>
+        <p><b>User Name</b>: {{ $event->user->name }}</p>
         <hr>
 
         <form action="{{ route('events.destroy', [ $event->id ]) }}" method="post">
