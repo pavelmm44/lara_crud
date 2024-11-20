@@ -1,6 +1,5 @@
-<x-layout.default title="Edit event">
+<x-layout.office title="Edit event">
     <div>
-        <a href="{{ route('events.index') }}" class="btn btn-warning btn-sm">Events list</a> |
         <a href="{{ route('events.show', [ $event->id ]) }}" class="btn btn-success btn-sm">Show event</a>
         <hr>
     </div>
@@ -24,4 +23,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.office>

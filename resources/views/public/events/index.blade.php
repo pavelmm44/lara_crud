@@ -1,8 +1,5 @@
-<x-layout.office title="Show events list">
-    <div>
-        <a href="{{ route('events.create') }}" class="btn btn-sm btn-success">Create event</a>
-        <hr>
-    </div>
+<x-layout.public title="Show events list">
+
     <div class="row">
         <h2 class="text-center">List of events</h2>
         @foreach($events as $event)
@@ -22,4 +19,4 @@
             </div>
         @endforeach
     </div>
-</x-layout.office>
+</x-layout.public>

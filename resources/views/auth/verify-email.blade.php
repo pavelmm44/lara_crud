@@ -1,4 +1,4 @@
-<x-layout.default title="Email Verification">
+<x-layout.office title="Email Verification">
 
     <div>
         <h3>Email Verification</h3>
@@ -9,4 +9,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.office>

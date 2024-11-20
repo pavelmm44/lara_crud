@@ -1,4 +1,4 @@
-<x-layout.default title="Registration">
+<x-layout.public title="Registration">
 
     <div>
         <h3>Registration</h3>

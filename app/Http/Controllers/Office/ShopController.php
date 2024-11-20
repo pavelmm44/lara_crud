@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Office;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DeleteProductsShopRequest;
-use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Office;
 
+use App\Http\Controllers\Controller;
 use App\Models\Message;
 use Illuminate\Http\Request;
 

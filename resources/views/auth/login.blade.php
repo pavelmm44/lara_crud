@@ -1,4 +1,4 @@
-<x-layout.default title="Login">
+<x-layout.public title="Login">
 
     <div>
         <h3>Login</h3>
@@ -16,4 +16,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.public>

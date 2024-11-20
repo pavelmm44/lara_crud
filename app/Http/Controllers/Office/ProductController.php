@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Office;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsShopsPriceRequest;
 use App\Http\Requests\SaveShopsProductRequest;
 use App\Models\Product;

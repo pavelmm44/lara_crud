@@ -8,12 +8,12 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\MessagesController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Office\CategoryController;
+use App\Http\Controllers\Office\EventController;
+use App\Http\Controllers\Office\MessagesController;
+use App\Http\Controllers\Office\ProductController;
+use App\Http\Controllers\Office\ProfileController;
+use App\Http\Controllers\Office\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,24 +21,7 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::resource('messages', MessagesController::class)->middleware('auth');
-Route::post('messages/valid', [MessagesController::class, 'sendValid']);
-
-Route::resource('events', EventController::class);
-
-Route::resource('categories', CategoryController::class);
-
-Route::resource('shops', ShopController::class);
-Route::delete('shops/{shop}/products', [ShopController::class, 'deleteProducts']);
-
-Route::get('products/prices', [ProductController::class, 'getProductsShopsPrice']);
-Route::resource('products', ProductController::class);
-
-Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops');
-Route::post('products/{product}/shops', [ProductController::class, 'saveShops']);
-
-Route::get('products/{product}/prices', [ProductController::class, 'getShopsPrice']);
-Route::get('products/best/price', [ProductController::class, 'getBestPriceProducts']);
+Route::get('events', [\App\Http\Controllers\Public\EventController::class, 'index'])->name('public.events');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [SessionController::class, 'create'])->name('login');
@@ -59,7 +42,27 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('office')->group(function () {
+
+    Route::resource('events', EventController::class);
+
+    Route::resource('messages', MessagesController::class);
+    Route::post('messages/valid', [MessagesController::class, 'sendValid']);
+
+    Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops');
+    Route::post('products/{product}/shops', [ProductController::class, 'saveShops']);
+
+    Route::get('products/prices', [ProductController::class, 'getProductsShopsPrice']);
+    Route::resource('products', ProductController::class);
+
+    Route::get('products/{product}/prices', [ProductController::class, 'getShopsPrice']);
+    Route::get('products/best/price', [ProductController::class, 'getBestPriceProducts']);
+
+    Route::resource('shops', ShopController::class);
+    Route::delete('shops/{shop}/products', [ShopController::class, 'deleteProducts']);
+
+    Route::resource('categories', CategoryController::class);
+
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');

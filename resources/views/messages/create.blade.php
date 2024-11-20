@@ -1,9 +1,4 @@
-<x-layout.default title="Create message">
-    <div>
-        <a href="{{ route('messages.index') }}" class="btn btn-warning btn-sm">Messages list</a>
-        <hr>
-    </div>
-
+<x-layout.office title="Create message">
     <div>
         <h2>Create message</h2>
         <form action="{{ route('messages.store') }}" method="post">
@@ -17,4 +12,4 @@
         </form>
         <hr>
     </div>
-</x-layout.default>
+</x-layout.office>

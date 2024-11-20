@@ -1,4 +1,4 @@
-<x-layout.default title="Edit shops configuration">
+<x-layout.office title="Edit shops configuration">
 
     <div>
         <div>
@@ -44,4 +44,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.office>

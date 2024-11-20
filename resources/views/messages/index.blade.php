@@ -1,16 +1,21 @@
-<x-layout.default title="Show messages list">
+<x-layout.office title="Show messages list">
     <div>
         <a href="{{ route('messages.create') }}" class="btn btn-sm btn-success">Create message</a>
         <hr>
     </div>
-    <div>
-        <h2>List of messages</h2>
+    <div class="row">
+        <h2 class="text-center">List of messages</h2>
         @foreach($messages as $message)
-            <div>
-                <p><b>Title</b>: {{ $message->title }}</p>
-                <a href="{{ route('messages.show', [ $message->id ]) }}" class="btn btn-sm btn-info">Show more</a>
+            <div class="card ml-6 mb-6" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $message->title }}</h5>
+                    <p class="card-text">
+                        <p><b>Title</b>: {{ $message->title }}</p>
+                    </p>
+                    <hr>
+                    <a href="{{ route('messages.show', [ $message->id ]) }}" class="btn btn-sm btn-warning">Show more</a>
+                </div>
             </div>
-            <hr>
         @endforeach
     </div>
-</x-layout.default>
+</x-layout.office>

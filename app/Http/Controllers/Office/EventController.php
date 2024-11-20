@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Office;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Category;
 use App\Models\Event;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class EventController extends Controller implements HasMiddleware
+class EventController extends Controller
 {
-    public static function middleware()
-    {
-        return [
-            new Middleware('auth', except: ['index'])
-        ];
-    }
-
     public function index()
     {
         $events = Event::with(['category', 'user'])->get();

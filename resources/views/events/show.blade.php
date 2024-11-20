@@ -1,8 +1,5 @@
-<x-layout.default title="Show event">
-    <div>
-        <a href="{{ route('events.index') }}" class="btn btn-sm btn-success">Events list</a>
-        <hr>
-    </div>
+<x-layout.office title="Show event">
+
     <div>
         <h2>Event info</h2>
         <p><b>ID</b>: {{ $event->id }}</p>
@@ -25,4 +22,4 @@
             <button class="btn btn-danger btn-sm">Delete event</button>
         </form>
     </div>
-</x-layout.default>
+</x-layout.office>

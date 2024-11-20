@@ -1,9 +1,4 @@
-<x-layout.default title="Create event">
-    <div>
-        <a href="{{ route('events.index') }}" class="btn btn-warning btn-sm">Events list</a>
-        <hr>
-    </div>
-
+<x-layout.office title="Create event">
     <div>
         <h3>Create event</h3>
         <form action="{{ route('events.store') }}" method="post">
@@ -23,4 +18,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.office>

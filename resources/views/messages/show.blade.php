@@ -1,9 +1,4 @@
-<x-layout.default title="Show message">
-    <div>
-        <a href="{{ route('messages.index') }}" class="btn btn-sm btn-success">Messages list</a>
-        <hr>
-    </div>
-
+<x-layout.office title="Show message">
     <div>
         <h2>Message info</h2>
         <p><b>ID</b>: {{ $message->id }}</p>
@@ -13,4 +8,4 @@
         <p><b>Update date</b>: {{ $message->updated_at }}</p>
         <hr>
     </div>
-</x-layout.default>
+</x-layout.office>

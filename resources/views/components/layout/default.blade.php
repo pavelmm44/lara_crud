@@ -17,17 +17,8 @@
     <div class="container">
         <h3>Here is header</h3>
         @auth
-            <p>Hello, {{ auth()->user()->name }}!</p>
-
-            <form action="{{ route('logout') }}" method="post">
-                @csrf
-                <button class="btn btn-sm btn-danger">Logout</button>
-            </form>
+            <h3 class="text-center">Hello, {{ auth()->user()->name }}!</h3>
         @endauth
-        @guest
-            <a href="{{ route('login') }}" class="btn btn-sm btn-warning">Login</a> |
-            <a href="{{ route('register') }}" class="btn btn-sm btn-success">Registration</a>
-        @endguest
         <hr>
     </div>
 </header>

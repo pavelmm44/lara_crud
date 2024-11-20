@@ -1,4 +1,4 @@
-<x-layout.default title="Edit profile">
+<x-layout.office title="Edit profile">
 
     <div>
         <h3>Update user's information</h3>
@@ -31,4 +31,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.office>

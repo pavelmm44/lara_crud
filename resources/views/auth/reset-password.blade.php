@@ -1,4 +1,4 @@
-<x-layout.default title="Reset password">
+<x-layout.public title="Reset password">
 
     <div>
         <h3>Reset password</h3>
@@ -17,4 +17,4 @@
         </form>
     </div>
     <hr>
-</x-layout.default>
+</x-layout.public>
