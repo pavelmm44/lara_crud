@@ -14,6 +14,7 @@ use App\Http\Controllers\Office\MessagesController;
 use App\Http\Controllers\Office\ProductController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\ShopController;
+use App\Http\Controllers\Office\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,6 +64,7 @@ Route::middleware('auth')->prefix('office')->group(function () {
 
     Route::resource('categories', CategoryController::class);
 
+    Route::resource('tags', TagController::class);
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
