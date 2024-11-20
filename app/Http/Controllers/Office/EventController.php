@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
 use App\Models\Category;
 use App\Models\Event;
+use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
@@ -35,11 +36,13 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
+        Gate::authorize('update-event', $event);
         return view('events/show', compact('event'));
     }
 
     public function edit(Event $event)
     {
+        Gate::authorize('update-event', $event);
         $categories = Category::all()->pluck('title', 'id');
 
         return view('events/edit', compact('event', 'categories'));
@@ -47,6 +50,7 @@ class EventController extends Controller
 
     public function update(EventRequest $request, Event $event)
     {
+        Gate::authorize('update-event', $event);
         $validated = $request->validated();
 
         $event->update($validated);
@@ -55,6 +59,7 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        Gate::authorize('update-event', $event);
         $event->delete();
 
         return redirect()->route('events.index')->with('success', 'Event has been deleted');
