@@ -19,6 +19,8 @@
 
             <x-form.select label="Category" name="category_id" :data="$categories" :item="$event"/>
 
+            <x-form.select label="Tags" name="tags" :multiple="true" :data="$tags" :item="$event"/>
+
             <button type="submit" class="btn btn-primary btn-sm">Save</button>
         </form>
     </div>

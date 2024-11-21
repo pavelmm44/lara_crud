@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -42,6 +43,11 @@ class EventRequest extends FormRequest
             'category_id' => [
                 'required',
                 'exists:' . Category::class . ',id'
+            ],
+            'tags' => 'array',
+            'tags.*' => [
+                'integer',
+                'exists:' . Tag::class . ',id'
             ]
         ];
     }

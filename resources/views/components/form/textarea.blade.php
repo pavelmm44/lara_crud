@@ -21,8 +21,6 @@
 
 <div class="{{ $classes }}">
     <label for="{{ $id }}" class="form-label">{{ $label }}</label>
-    <textarea name="{{ $name }}" class="form-control" id="{{ $id }}" rows="{{ $rows ?? null }}">
-        {{ $realValue }}
-    </textarea>
+    <textarea name="{{ $name }}" class="form-control" id="{{ $id }}" rows="{{ $rows ?? null }}">{{ $realValue }}</textarea>
     <x-form.error name="{{ $name }}" />
 </div>

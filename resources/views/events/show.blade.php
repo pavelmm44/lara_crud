@@ -12,6 +12,15 @@
         <p><b>Update date</b>: {{ $event->updated_at }}</p>
         <p><b>User ID</b>: {{ $event->user->id }}</p>
         <p><b>User Name</b>: {{ $event->user->name }}</p>
+
+        @if($event->tags->isNotEmpty())
+            <p><b>Tags:</b></p>
+            <p>
+            @foreach($event->tags as $tag)
+                {{ $tag->title }}
+            @endforeach
+            </p>
+        @endif
         <hr>
 
         <form action="{{ route('events.destroy', [ $event->id ]) }}" method="post">

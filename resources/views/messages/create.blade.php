@@ -7,6 +7,8 @@
 
             <x-form.textarea label="Content" name="content" rows="3"/>
 
+            <x-form.select label="Tags" name="tags" :data="$tags" :multiple="true"/>
+
             <button class="btn btn-primary btn-sm" type="submit">Save</button>
             <button type="button" id="send-valid-btn" class="btn btn-info btn-sm">sendValid</button>
         </form>

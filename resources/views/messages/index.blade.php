@@ -6,14 +6,30 @@
     <div class="row">
         <h2 class="text-center">List of messages</h2>
         @foreach($messages as $message)
-            <div class="card ml-6 mb-6" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $message->title }}</h5>
-                    <p class="card-text">
-                        <p><b>Title</b>: {{ $message->title }}</p>
-                    </p>
-                    <hr>
-                    <a href="{{ route('messages.show', [ $message->id ]) }}" class="btn btn-sm btn-warning">Show more</a>
+            <div class="col-md-4 mb-6">
+                <div class="card" style="height: 100%; width: 80%">
+                    <div class="card-header">
+                        {{ $message->title }}
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            <p><b>Content</b>: {{ $message->content }}</p>
+                        </p>
+
+                        @if($message->tags->isNotEmpty())
+                            <p><b>Tags:</b></p>
+                            <p>
+                                @foreach($message->tags as $tag)
+                                    {{ $tag->title }}
+                                @endforeach
+                            </p>
+                        @endif
+                    </div>
+
+                    <div class="card-footer">
+                        <a href="{{ route('messages.show', [ $message->id ]) }}" class="btn btn-sm btn-warning">Show more</a>
+                    </div>
                 </div>
             </div>
         @endforeach

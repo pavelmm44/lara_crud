@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Office\CategoryController;
 use App\Http\Controllers\Office\EventController;
-use App\Http\Controllers\Office\MessagesController;
+use App\Http\Controllers\Office\MessageController;
 use App\Http\Controllers\Office\ProductController;
 use App\Http\Controllers\Office\ProfileController;
 use App\Http\Controllers\Office\ShopController;
@@ -47,8 +47,8 @@ Route::middleware('auth')->prefix('office')->group(function () {
 
     Route::resource('events', EventController::class);
 
-    Route::resource('messages', MessagesController::class);
-    Route::post('messages/valid', [MessagesController::class, 'sendValid']);
+    Route::resource('messages', MessageController::class);
+    Route::post('messages/valid', [MessageController::class, 'sendValid']);
 
     Route::get('products/{product}/shops', [ProductController::class, 'editShops'])->name('products.shops');
     Route::post('products/{product}/shops', [ProductController::class, 'saveShops']);

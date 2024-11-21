@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Event extends Model
 {
@@ -17,5 +18,10 @@ class Event extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 }
