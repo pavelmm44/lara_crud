@@ -1,7 +1,7 @@
 <x-layout.office title="Create event">
     <div>
         <h3>Create event</h3>
-        <form action="{{ route('events.store') }}" method="post">
+        <form action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <x-form.input type="text" label="Title" name="title"/>
@@ -15,6 +15,9 @@
             <x-form.select label="Category" name="category_id" :data="$categories"/>
 
             <x-form.select label="Tags" name="tags" :data="$tags" :multiple="true"/>
+
+            <x-form.input type="file" label="Images" name="image" :is_array="true" :multiple_files="true"/>
+
 
             <button class="btn btn-primary btn-sm" type="submit">Save</button>
         </form>

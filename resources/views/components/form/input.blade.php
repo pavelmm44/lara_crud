@@ -5,6 +5,8 @@
     'type' => 'text',
     'value' => null,
     'item' => null,
+    'is_array' => false,
+    'multiple_files' => false
 ])
 
 @php
@@ -21,6 +23,17 @@
 
 <div class="{{ $classes }}">
     <label for="{{ $id }}" class="form-label">{{ $label }}</label>
-    <input type="{{ $type }}" name="{{ $name }}" class="form-control" id="{{ $id }}" value="{{ $realValue }}">
-    <x-form.error name="{{ $name }}" />
+    <input type="{{ $type }}" name="{{ $is_array ? $name . '[]' : $name}}" class="form-control" id="{{ $id }}" value="{{ $realValue }}" {{ $multiple_files ? 'multiple' : '' }}>
+
+    @if($is_array)
+        @foreach($errors->get($name . '*') as $items)
+            <div class="text-danger">
+                @foreach($items as $item)
+                    {{ $item }}
+                @endforeach
+            </div>
+        @endforeach
+    @else
+        <x-form.error name="{{ $name }}" />
+    @endif
 </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Office\CategoryController;
 use App\Http\Controllers\Office\EventController;
+use App\Http\Controllers\Office\ImageController;
 use App\Http\Controllers\Office\MessageController;
 use App\Http\Controllers\Office\ProductController;
 use App\Http\Controllers\Office\ProfileController;
@@ -65,6 +66,11 @@ Route::middleware('auth')->prefix('office')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::resource('tags', TagController::class);
+
+    Route::get('images/create/{model}/{id}', [ImageController::class, 'create'])->whereIn('model', array_keys(config('imageables')))->where('id', '[0-9]+')->name('images.create');
+
+    Route::post('images/{model}/{id}', [ImageController::class, 'store'])->whereIn('model', array_keys(config('imageables')))->where('id', '[0-9]+')->name('images.store');
+
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
