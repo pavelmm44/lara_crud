@@ -6,12 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
 use App\Models\Tag;
+use App\Services\AddressParsers\ParserInterface;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function index(ParserInterface $addParser)
     {
+        $response = $addParser->clean("address", "мск сухонская 11 89");
+        //dump($response);
+
         $messages = Message::with('tags')->get();
 
         return view('messages/index', compact('messages'));
