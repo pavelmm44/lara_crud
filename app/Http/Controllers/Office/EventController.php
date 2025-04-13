@@ -51,8 +51,11 @@ class EventController extends Controller
         Gate::authorize('update-event', $event);
         $categories = Category::all()->pluck('title', 'id');
         $tags = Tag::all()->pluck('title', 'id');
+        $nameParts = explode('\\', get_class($event));
 
-        return view('events/edit', compact('event', 'categories', 'tags'));
+        $modelName = lcfirst(end($nameParts));
+
+        return view('events/edit', compact('event', 'categories', 'tags', 'modelName'));
     }
 
     public function update(EventRequest $request, Event $event)

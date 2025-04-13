@@ -67,9 +67,13 @@ Route::middleware('auth')->prefix('office')->group(function () {
 
     Route::resource('tags', TagController::class);
 
-    Route::get('images/create/{model}/{id}', [ImageController::class, 'create'])->whereIn('model', array_keys(config('imageables')))->where('id', '[0-9]+')->name('images.create');
+    Route::get('images/create/{model}/{id}', [ImageController::class, 'create'])
+        ->whereIn('model', array_keys(config('imageables')))
+        ->where('id', '[0-9]+')->name('images.create');
 
-    Route::post('images/{model}/{id}', [ImageController::class, 'store'])->whereIn('model', array_keys(config('imageables')))->where('id', '[0-9]+')->name('images.store');
+    Route::post('images/{model}/{id}', [ImageController::class, 'store'])
+        ->whereIn('model', array_keys(config('imageables')))
+        ->where('id', '[0-9]+')->name('images.store');
 
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -32,19 +32,19 @@ class ImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ImageRequest $request, string $model, int $id)
+    public function store(string $model, string $id, ImageRequest $request)
     {
-//        dd($request->image);
         $model = config('imageables')[$model]::findOrFail($id);
 
         foreach ($request->image as $image) {
 
             $img = new Image();
-//            $img->url = Storage::putFile('images', $image);
-            $img->url = $image->store('images/' . date('Y') . '/' . date('m'));
+            $img->url = '/storage/' . $image->store('images/' . date('Y') . '/' . date('m'));
             $model->images()->save($img);
         }
 
+        return redirect()
+            ->intended(route($model->getTable() . '.edit', $id));
     }
 
     /**

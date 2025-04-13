@@ -27,7 +27,7 @@
             <div>
                 <p><b>Images:</b></p>
                 @foreach($event->images as $image)
-                    <img class="img-thumbnail" src="{{ Storage::url($image->url) }}" style="max-height: 100px; display: inline; margin-left: 20px">
+                    <img class="img-thumbnail" src="{{ $image->url }}" style="max-height: 100px; display: inline; margin-left: 20px">
                 @endforeach
             </div>
         @endif
